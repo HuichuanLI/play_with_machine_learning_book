@@ -1,17 +1,17 @@
-number of training examples = 1080
-number of test examples = 120
-X_train shape: (1080, 64, 64, 3)
-Y_train shape: (1080, 6)
-X_test shape: (120, 64, 64, 3)
-Y_test shape: (120, 6)
-x train max,0.956; x train min,0.015
-x test max,0.94; x test min,0.011
+# number of training examples = 1080
+# number of test examples = 120
+# X_train shape: (1080, 64, 64, 3)
+# Y_train shape: (1080, 6)
+# X_test shape: (120, 64, 64, 3)
+# Y_test shape: (120, 6)
+# x train max,0.956; x train min,0.015
+# x test max,0.94; x test min,0.011
 def convolutional_block(self, X_input, kernel_size, in_filter,out_filters, stage, block, training, stride=2):
     # defining name basis
-block_name = 'res' + str(stage) + block
+    block_name = 'res' + str(stage) + block
     with tf.variable_scope(block_name):
         f1, f2, f3 = out_filters
-x_shortcut = X_input
+        x_shortcut = X_input
         #first
         W_conv1 = self.weight_variable([1, 1, in_filter, f1])
         X = tf.nn.conv2d(X_input, W_conv1,strides=[1, stride, stride, 1],padding='VALID')
@@ -27,8 +27,8 @@ x_shortcut = X_input
         X = tf.nn.conv2d(X, W_conv3, strides=[1, 1, 1,1], padding='VALID')
         X = tf.layers.batch_normalization(X, axis=3, training=training)
         #shortcut path
-W_shortcut = self.weight_variable([1, 1, in_filter, f3])
-x_shortcut=tf.nn.conv2d(x_shortcut, W_shortcut, strides=[1, stride, stride, 1], padding='VALID')
+        W_shortcut = self.weight_variable([1, 1, in_filter, f3])
+        x_shortcut=tf.nn.conv2d(x_shortcut, W_shortcut, strides=[1, stride, stride, 1], padding='VALID')
         #final
         add = tf.add(x_shortcut, X)
 add_result = tf.nn.relu(add)
