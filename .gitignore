@@ -6,3 +6,5 @@
 .idea/inspectionProfiles/
 
 .idea/
+
+GAN/mnistGANs-main/__pycache__/
